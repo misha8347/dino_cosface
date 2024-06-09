@@ -2,9 +2,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from copy import deepcopy
-from cosface import CosFace
+from src.models.cosface import CosFace
 
-num_classes = 5749
+num_classes = 30
 dinov2_vitb14 = torch.hub.load('facebookresearch/dinov2', 'dinov2_vitb14')
 
 

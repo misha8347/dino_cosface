@@ -6,12 +6,10 @@ def train_fn(model, device, train_loader, test_loader, optimizer, criterion, num
     model.to(device)
     losses = []
     train_accuracies = []
-    test_accuracies = []
     for epoch_i in range(num_epochs):
         print(f"epoch {epoch_i}")
         epoch_loss = 0.0
         epoch_train_accuracy = 0.0
-        epoch_test_accuracy = 0.0
 
         model.train()
         for images, labels in tqdm(train_loader):
@@ -36,21 +34,6 @@ def train_fn(model, device, train_loader, test_loader, optimizer, criterion, num
         
         losses.append(epoch_loss)
         train_accuracies.append(epoch_train_accuracy)
-        
     
-        model.eval()
-        with torch.no_grad():
-            for images, labels in tqdm(test_loader):
-                images = images.to(device)
-                labels = labels.to(device)
-                
-                logits = model(images)
-                pred_labels = logits.argmax(dim=1)
-                epoch_test_accuracy += (torch.sum(pred_labels == labels).item() / labels.shape[0])
-            
-            epoch_test_accuracy /= len(test_loader)
-            print(f'test epoch accuracy: {epoch_test_accuracy}')
-            test_accuracies.append(epoch_test_accuracy)
-    
-    return losses, train_accuracies, test_accuracies
+    return losses, train_accuracies
                 

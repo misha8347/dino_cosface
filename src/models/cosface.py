@@ -4,7 +4,7 @@ import torch.nn.functional as F
 from copy import deepcopy
 
 feature_dim = 768
-num_classes = 5749
+num_classes = 30
 s = 30.0
 m = 0.8
 
