@@ -2,7 +2,7 @@ import torch
 from tqdm import tqdm
 
 
-def train_fn(model, device, train_loader, test_loader, optimizer, criterion, num_epochs):
+def train_fn(model, device, train_loader, optimizer, criterion, num_epochs):
     model.to(device)
     losses = []
     train_accuracies = []

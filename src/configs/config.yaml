@@ -1,3 +1,7 @@
 path_to_data: ./YALEBXF.mat
-
 path_to_checkpoint: ./checkpoints/dinov2_cosface.pth
+
+num_classes: 30
+feature_dim: 768
+s: 30.0
+m: 0.8

@@ -3,13 +3,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 from copy import deepcopy
 
-feature_dim = 768
-num_classes = 30
-s = 30.0
-m = 0.8
 
 class CosFace(nn.Module):
-    def __init__(self, num_features=feature_dim, num_classes=num_classes, s=s, m=m):
+    def __init__(self, num_features, num_classes, s, m):
         super(CosFace, self).__init__()
         self.s = s
         self.m = m

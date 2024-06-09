@@ -17,7 +17,8 @@ from src.utils import load_yaml
 def main(cfg_path: str):
     cfg = Dict(load_yaml(cfg_path))
 
-    model = DinoVisionTransformerClassifier()
+    model = DinoVisionTransformerClassifier(num_classes=cfg.num_classes, num_features=cfg.feature_dim,
+                                            s=cfg.s, m=cfg.m)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     transform = A.Compose([
@@ -40,7 +41,7 @@ def main(cfg_path: str):
         if 'classifier' not in name:
             param.requires_grad = False
     losses, train_accuracies = train_fn(model, device, train_loader, 
-                                        test_loader, optimizer, criterion, num_epochs)
+                                        optimizer, criterion, num_epochs)
 
     
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-5)
@@ -52,7 +53,7 @@ def main(cfg_path: str):
             param.requires_grad = True
 
     losses2, train_accuracies2 = train_fn(model, device, train_loader, 
-                                        test_loader, optimizer, criterion, num_epochs)
+                                        optimizer, criterion, num_epochs)
 
 
     print('saving model state dict...')
